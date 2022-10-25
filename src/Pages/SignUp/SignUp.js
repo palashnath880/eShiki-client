@@ -26,6 +26,8 @@ const SignUp = () => {
                                     <span className="label-text">Password</span>
                                 </label>
                                 <input type="text" placeholder="password" className="input input-bordered" />
+                            </div>
+                            <div className='form-control'>
                                 <label className="label">
                                     <span className="label-text">Confirm Password</span>
                                 </label>
