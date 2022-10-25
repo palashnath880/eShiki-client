@@ -32,19 +32,19 @@ const Header = () => {
     }, []);
 
     return (
-        <div ref={header} className={`z-50 ${sticky ? 'pb-0 bg-base-100' : 'pt-5'} w-full fixed top-0 left-0 duration-300 transition-all`}>
+        <div ref={header} className={`z-50 ${sticky ? 'fixed top-0 left-0' : ''}  bg-slate-50 w-full duration-300 transition-all`}>
             <div className='navbar container mx-auto'>
                 <div className="flex-1">
-                    <Link className={`normal-case text-3xl ${sticky ? 'text-gray-700' : 'text-slate-50'}`} style={{ fontFamily: "'Lobster Two', cursive" }} to='/'>
+                    <Link className={`normal-case text-3xl text-gray-700`} style={{ fontFamily: "'Lobster Two', cursive" }} to='/'>
                         e<span className='text-violet-500'>Shiki.com</span>
                     </Link>
                 </div>
-                <div className={`flex-none ${sticky ? 'text-gray-700' : 'text-slate-50'}`}>
+                <div className={`flex-none text-gray-700`}>
                     <ul className={`menu menu-horizontal p-0`}>
-                        <li><NavLink className={`bg-transparent ${sticky ? 'text-gray-700' : 'text-slate-50'}`}>Home</NavLink></li>
-                        <li><NavLink className={`bg-transparent ${sticky ? 'text-gray-700' : 'text-slate-50'}`}>About</NavLink></li>
-                        <li><NavLink className={`bg-transparent ${sticky ? 'text-gray-700' : 'text-slate-50'}`}>Our Courses</NavLink></li>
-                        <li><NavLink className={`bg-transparent ${sticky ? 'text-gray-700' : 'text-slate-50'}`}>FAQ</NavLink></li>
+                        <li><NavLink className={`bg-transparent text-gray-700`}>Home</NavLink></li>
+                        <li><NavLink className={`bg-transparent text-gray-700`}>About</NavLink></li>
+                        <li><NavLink className={`bg-transparent text-gray-700`}>Our Courses</NavLink></li>
+                        <li><NavLink className={`bg-transparent text-gray-700`}>FAQ</NavLink></li>
                     </ul>
                     {
                         user === null && <>
@@ -59,12 +59,12 @@ const Header = () => {
                         <label tabIndex={0} className="btn btn-ghost btn-circle">
                             <div className="indicator">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
-                                <span className={`badge badge-sm indicator-item ${sticky ? '' : 'bg-slate-50 text-gray-700'}`}>8</span>
+                                <span className={`badge badge-sm indicator-item bg-slate-50 text-gray-700`}>8</span>
                             </div>
                         </label>
                         <div tabIndex={0} className="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow">
                             <div className="card-body">
-                                <span className="font-bold text-lg">8 Items</span>
+                                <span className="font-bold text-lg text-gray-700">8 Items</span>
                                 <span className="text-info">Subtotal: $999</span>
                                 <div className="card-actions">
                                     <button className="btn btn-primary btn-block">View cart</button>

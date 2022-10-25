@@ -8,7 +8,6 @@ const PrivateRoute = ({ children }) => {
     const location = useLocation();
 
     if (user === null) {
-        // navigate('/login', { state: location });
         return (
             <>
                 <Navigate to={'/login'} state={location} replace></Navigate>

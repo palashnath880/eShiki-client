@@ -1,6 +1,7 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Main from '../layout/Main';
+import Courses from '../Pages/Courses/Courses';
 import Home from '../Pages/Home/Home';
 import Login from '../Pages/Login/Login';
 import SignUp from '../Pages/SignUp/SignUp';
@@ -24,6 +25,10 @@ const Routes = ({ children }) => {
                 {
                     path: '/signup',
                     element: <AuthenticationRoute><SignUp /></AuthenticationRoute>
+                },
+                {
+                    path: '/courses',
+                    element: <Courses />
                 }
             ]
         }

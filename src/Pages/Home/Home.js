@@ -1,20 +1,17 @@
 import React from 'react';
+import Achievement from '../../components/Achievement/Achievement';
 import Banner from '../../components/Banner/Banner';
-import Sidebar from '../../components/Sidebar/Sidebar';
+import Review from '../../components/Review/Review';
+import OurCourses from '../../components/OurCourses/OurCourses';
 
 const Home = () => {
     return (
         <>
             <Banner />
-            <div className=''>
-                <div className='flex'>
-                    <div className='w-2/12'>
-                        <Sidebar />
-                    </div>
-                    <div className='w-10/12'>
-
-                    </div>
-                </div>
+            <div className='container px-5 md:px-0 mx-auto'>
+                <Achievement />
+                <OurCourses />
+                <Review />
             </div>
         </>
     );
