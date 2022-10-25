@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 import { FaGoogle, FaGithub } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../contexts/AuthContext';
 
 const SignUp = () => {
@@ -9,6 +9,10 @@ const SignUp = () => {
     const { signUpHandler, githubAuthHandler, googleAuthHandler } = useContext(UserContext);
     const [error, setError] = useState(null);
     const [signUpLoading, setSignUpLoading] = useState(false);
+    const navigate = useNavigate();
+
+    const location = useLocation();
+    const pathName = location.state?.pathName;
 
     const createUserHandler = (event) => {
 
@@ -40,6 +44,7 @@ const SignUp = () => {
             .then(() => {
                 toast.success('Signup successfully');
                 setSignUpLoading(false);
+                navigate(pathName, { replace: true });
             })
             .catch(error => {
                 setSignUpLoading(false);
@@ -56,6 +61,7 @@ const SignUp = () => {
         googleAuthHandler()
             .then(() => {
                 toast.success('Signup successfully');
+                navigate(pathName, { replace: true });
             })
             .catch(error => console.log(error));
     }
@@ -64,6 +70,7 @@ const SignUp = () => {
         githubAuthHandler()
             .then(() => {
                 toast.success('Signup successfully');
+                navigate(pathName, { replace: true });
             })
             .catch(error => console.log(error));
     }

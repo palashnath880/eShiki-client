@@ -1,16 +1,25 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useRef, useContext } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+import { UserContext } from '../../contexts/AuthContext';
 
 const Header = () => {
-    const [sticky, setSticky] = useState(false);
+    const { user, logOut } = useContext(UserContext)
 
+    const [sticky, setSticky] = useState(false);
     const header = useRef();
+
+    const logoutHandler = () => {
+        logOut()
+            .then()
+            .catch(error => console.error(error));
+    }
 
     useEffect(() => {
 
         const stickyNavbar = () => {
             const currentScrollPos = window.pageYOffset;
             const headerHeight = header.current.clientHeight;
+
             currentScrollPos > headerHeight ? setSticky(true) : setSticky(false);
         }
 
@@ -31,16 +40,21 @@ const Header = () => {
                     </Link>
                 </div>
                 <div className={`flex-none ${sticky ? 'text-gray-700' : 'text-slate-50'}`}>
-                    <ul className="menu menu-horizontal p-0">
-                        <li><Link className='hover:bg-transparent'>Home</Link></li>
-                        <li><Link className='hover:bg-transparent'>About</Link></li>
-                        <li><Link className='hover:bg-transparent'>Our Courses</Link></li>
-                        <li><Link className='hover:bg-transparent'>FAQ</Link></li>
+                    <ul className={`menu menu-horizontal p-0`}>
+                        <li><NavLink className={`bg-transparent ${sticky ? 'text-gray-700' : 'text-slate-50'}`}>Home</NavLink></li>
+                        <li><NavLink className={`bg-transparent ${sticky ? 'text-gray-700' : 'text-slate-50'}`}>About</NavLink></li>
+                        <li><NavLink className={`bg-transparent ${sticky ? 'text-gray-700' : 'text-slate-50'}`}>Our Courses</NavLink></li>
+                        <li><NavLink className={`bg-transparent ${sticky ? 'text-gray-700' : 'text-slate-50'}`}>FAQ</NavLink></li>
                     </ul>
-                    <ul className="flex gap-2">
-                        <li><Link className='duration-300 border hover:bg-violet-500 hover:text-slate-50 hover:border-violet-500 py-2 px-4 rounded-full' to='/login'>Login</Link></li>
-                        <li><Link className='duration-300 border hover:bg-violet-500 hover:text-slate-50 hover:border-violet-500 py-2 px-4 rounded-full' to='/signup'>Signup</Link></li>
-                    </ul>
+                    {
+                        user === null && <>
+                            <ul className="flex gap-2">
+                                <li><NavLink className='duration-300 border hover:bg-violet-500 hover:text-slate-50 hover:border-violet-500 py-2 px-4 rounded-full' to='/login'>Login</NavLink></li>
+                                <li><NavLink className='duration-300 border hover:bg-violet-500 hover:text-slate-50 hover:border-violet-500 py-2 px-4 rounded-full' to='/signup'>Signup</NavLink></li>
+                            </ul>
+                        </>
+                    }
+
                     <div className="dropdown dropdown-end mr-2">
                         <label tabIndex={0} className="btn btn-ghost btn-circle">
                             <div className="indicator">
@@ -58,26 +72,31 @@ const Header = () => {
                             </div>
                         </div>
                     </div>
-                    {/* <div className="dropdown dropdown-end">
-                        <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                            <div className="w-10 rounded-full">
-                                <img src="https://placeimg.com/80/80/people" />
+                    {
+                        user && user.uid ? <>
+                            <div className="dropdown dropdown-end text-gray-700">
+                                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                                    <div className="w-10 rounded-full">
+                                        <img src="https://placeimg.com/80/80/people" />
+                                    </div>
+                                </label>
+                                <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                                    <li>
+                                        <a className="justify-between">
+                                            Profile
+                                            <span className="badge">New</span>
+                                        </a>
+                                    </li>
+                                    <li><a>Settings</a></li>
+                                    <li><button onClick={logoutHandler}>Logout</button></li>
+                                </ul>
                             </div>
-                        </label>
-                        <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                            <li>
-                                <a className="justify-between">
-                                    Profile
-                                    <span className="badge">New</span>
-                                </a>
-                            </li>
-                            <li><a>Settings</a></li>
-                            <li><a>Logout</a></li>
-                        </ul>
-                    </div> */}
+                        </> : ''
+                    }
+
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 
