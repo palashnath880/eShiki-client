@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 import { UserContext } from '../../contexts/AuthContext';
 
 const Profile = () => {
 
     const { user, updateUser, forgetPassword } = useContext(UserContext);
+    const [loading, setLoading] = useState(false);
 
     const passwordResetHandler = () => {
         const email = user.email;
@@ -24,10 +25,11 @@ const Profile = () => {
         if (!name || !photoURL) {
             return;
         }
-
+        setLoading(true);
         updateUser(name, photoURL)
-            .then((result) => {
-                console.log(result);
+            .then(() => {
+                toast.success('Your profile update successfully');
+                setLoading(false);
             })
             .catch(error => console.error(error));
     }
@@ -53,9 +55,10 @@ const Profile = () => {
                                 <label className='w-32 font-semibold'>Photo Url</label>
                                 <input className='focus:outline-0 focus:bg-slate-100 py-2 focus:px-3 ml-2' type='urk' name='photoURL' value={user?.photoURL} />
                             </div>
+                            {loading && <small className='pl-4 mt-3'>Updating.......</small>}
                             <div className='mt-5 p-3'>
-                                <button onClick={passwordResetHandler} type='button' className='hover:underline'>Forget Password</button>
-                                <button type='submit' className='hover:bg-transparent hover:text-gray-700 border border-green-500 ml-4 px-4 py-2 bg-green-500 text-slate-50'>Update Profile</button>
+                                <button disabled={loading ? true : false} onClick={passwordResetHandler} type='button' className='hover:underline'>Forget Password</button>
+                                <button disabled={loading ? true : false} type='submit' className='hover:bg-transparent hover:text-gray-700 border border-green-500 ml-4 px-4 py-2 bg-green-500 text-slate-50'>Update Profile</button>
                             </div>
                         </form>
                     </div>
