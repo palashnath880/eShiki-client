@@ -1,38 +1,35 @@
-import React from 'react';
-import { ShoppingCartIcon, ClockIcon } from '@heroicons/react/24/outline';
+import React, { useContext } from 'react';
+import { ShoppingCartIcon, ClockIcon, CheckIcon, AcademicCapIcon } from '@heroicons/react/24/outline';
+import { CartContext } from '../../contexts/CartsContext';
 
-const CourseItem = () => {
+const CourseItem = ({ course }) => {
+    const { cart, addToCart } = useContext(CartContext);
+    const { id, name, thumbnail, duration, price, rating, totalEnroll } = course;
+    const isCourseHaveCart = cart !== null && cart.find(cartItem => parseInt(cartItem.id) === parseInt(id));
+
     return (
         <div className="card bg-base-100 shadow-xl cursor-pointer hover:shadow-none border border-transparent hover:border-slate-200 duration-300">
             <figure className="px-3 pt-3">
-                <img src="https://placeimg.com/400/225/arch" alt="Shoes" className="rounded-xl" />
+                <img src={thumbnail} alt="" className="rounded-xl" />
             </figure>
             <div className="card-body py-3">
-                <h2 className="card-title">Shoes!</h2>
-                <p className='flex'>
+                <h2 className="card-title">{name}</h2>
+                <div className='flex'>
                     <span className='flex-1 flex items-center'>
                         <ClockIcon className='w-4 h-4 m-0 mr-1' />
-                        : 4 Hours
+                        : {duration}
                     </span>
-                    <span className='flex-1 flex items-center'>
-                        <div className="rating rating-sm">
-                            <input type="radio" name="rating-6" className="mask mask-star-2 bg-orange-400" />
-                            <input type="radio" name="rating-6" className="mask mask-star-2 bg-orange-400" checked />
-                            <input type="radio" name="rating-6" className="mask mask-star-2 bg-orange-400" />
-                            <input type="radio" name="rating-6" className="mask mask-star-2 bg-orange-400" />
-                            <input type="radio" name="rating-6" className="mask mask-star-2 bg-orange-400" />
-                        </div>
-                        : 4.5<small className='ml-1'>( 300 )</small>
+                    <span className='flex-1 flex justify-end items-center'>
+                        <AcademicCapIcon className='w-5 h-5 m-0 mr-1' />: {totalEnroll} Students
                     </span>
-                </p>
-
+                </div>
                 <div className="card-actions items-center mt-2">
                     <p className='text-lg font-semibold'>
-                        <span className='mr-1'>&#2547; :</span>700
+                        <span className='mr-1'>&#2547; :</span>{price}
                     </p>
-                    <button className="border py-2 px-5 flex items-center">
-                        Add To Cart
-                        <ShoppingCartIcon className='w-6 h-6 ml-2' />
+                    <button disabled={isCourseHaveCart ? true : false} onClick={() => addToCart(id, 1, price)} className="border py-2 px-5 flex items-center">
+                        {isCourseHaveCart ? 'Added' : 'Add To Cart'}
+                        {isCourseHaveCart ? <CheckIcon className='w-6 h-6 ml-2' /> : <ShoppingCartIcon className='w-6 h-6 ml-2' />}
                     </button>
                 </div>
             </div>

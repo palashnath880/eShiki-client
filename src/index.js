@@ -4,12 +4,18 @@ import './index.css';
 import App from './App';
 import AuthContext from './contexts/AuthContext';
 import reportWebVitals from './reportWebVitals';
+import CartsContext from './contexts/CartsContext';
+import CoursesContext from './contexts/CoursesContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <AuthContext>
-      <App />
+      <CoursesContext>
+        <CartsContext>
+          <App />
+        </CartsContext>
+      </CoursesContext>
     </AuthContext>
   </React.StrictMode>
 );

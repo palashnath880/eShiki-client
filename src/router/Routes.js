@@ -5,6 +5,7 @@ import Courses from '../Pages/Courses/Courses';
 import Home from '../Pages/Home/Home';
 import Login from '../Pages/Login/Login';
 import SignUp from '../Pages/SignUp/SignUp';
+import SingleCourse from '../components/SingleCourse/SingleCourse';
 import AuthenticationRoute from './AuthenticationRoute';
 import PrivateRoute from './PrivateRoute';
 
@@ -28,7 +29,13 @@ const Routes = ({ children }) => {
                 },
                 {
                     path: '/courses',
-                    element: <Courses />
+                    element: <Courses />,
+                    children: [
+                        {
+                            path: '/courses/:id',
+                            element: <SingleCourse />
+                        }
+                    ]
                 }
             ]
         }
