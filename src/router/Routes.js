@@ -10,6 +10,7 @@ import AuthenticationRoute from './AuthenticationRoute';
 import PrivateRoute from './PrivateRoute';
 import Cart from '../Pages/Cart/Cart';
 import AllCourse from '../components/AllCourse/AllCourse';
+import Profile from '../Pages/Profile/Profile';
 
 const Routes = ({ children }) => {
     const router = createBrowserRouter([
@@ -47,6 +48,10 @@ const Routes = ({ children }) => {
                 {
                     path: '/cart',
                     element: <Cart />
+                },
+                {
+                    path: '/profile',
+                    element: <PrivateRoute><Profile /></PrivateRoute>
                 }
             ]
         }
