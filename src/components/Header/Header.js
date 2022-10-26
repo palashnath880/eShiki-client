@@ -4,6 +4,7 @@ import { UserContext } from '../../contexts/AuthContext';
 import { CartContext } from '../../contexts/CartsContext';
 
 const Header = () => {
+
     const { user, logOut } = useContext(UserContext);
     const { cart } = useContext(CartContext);
 
@@ -75,9 +76,9 @@ const Header = () => {
                     {
                         user && user.uid ? <>
                             <div className="dropdown dropdown-end text-gray-700">
-                                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                                    <div className="w-10 rounded-full">
-                                        <img src="https://placeimg.com/80/80/people" />
+                                <label tabIndex={0} className="btn btn-ghost btn-circle">
+                                    <div className="z-50 w-10 h-10 overflow-visible rounded-full tooltip tooltip-left" data-tip={user?.displayName}>
+                                        <img className='w-full h-full rounded-full' src={user.photoURL ? user.photoURL : 'https://placeimg.com/80/80/people'} />
                                     </div>
                                 </label>
                                 <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
