@@ -8,7 +8,6 @@ const Header = () => {
     const { cart } = useContext(CartContext);
 
     const [sticky, setSticky] = useState(false);
-    const header = useRef();
 
     const logoutHandler = () => {
         logOut()
@@ -22,9 +21,7 @@ const Header = () => {
 
         const stickyNavbar = () => {
             const currentScrollPos = window.pageYOffset;
-            const headerHeight = header.current.clientHeight;
-
-            currentScrollPos > headerHeight ? setSticky(true) : setSticky(false);
+            currentScrollPos > 0 ? setSticky(true) : setSticky(false);
         }
 
         window.addEventListener('scroll', stickyNavbar);
@@ -36,7 +33,7 @@ const Header = () => {
     }, []);
 
     return (
-        <div ref={header} className={`z-50 ${sticky ? 'fixed top-0 left-0' : ''}  bg-slate-50 w-full duration-300 transition-all`}>
+        <div className={`z-50 ${sticky ? 'fixed top-0 left-0' : ''}  bg-slate-50 w-full duration-300 transition-all`}>
             <div className='navbar container mx-auto'>
                 <div className="flex-1">
                     <Link className={`normal-case text-3xl text-gray-700`} style={{ fontFamily: "'Lobster Two', cursive" }} to='/'>
@@ -45,10 +42,9 @@ const Header = () => {
                 </div>
                 <div className={`flex-none text-gray-700`}>
                     <ul className={`menu menu-horizontal p-0`}>
-                        <li><NavLink className={`bg-transparent text-gray-700`}>Home</NavLink></li>
-                        <li><NavLink className={`bg-transparent text-gray-700`}>About</NavLink></li>
-                        <li><NavLink className={`bg-transparent text-gray-700`}>Our Courses</NavLink></li>
-                        <li><NavLink className={`bg-transparent text-gray-700`}>FAQ</NavLink></li>
+                        <li><NavLink className={`bg-transparent text-gray-700`} to='/'>Home</NavLink></li>
+                        <li><NavLink className={`bg-transparent text-gray-700`} to='/courses'>Our Courses</NavLink></li>
+                        <li><NavLink className={`bg-transparent text-gray-700`} to='/faq'>FAQ</NavLink></li>
                     </ul>
                     {
                         user === null && <>
@@ -86,12 +82,11 @@ const Header = () => {
                                 </label>
                                 <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
                                     <li>
-                                        <a className="justify-between">
+                                        <Link to='/profile' className="justify-between">
                                             Profile
                                             <span className="badge">New</span>
-                                        </a>
+                                        </Link>
                                     </li>
-                                    <li><a>Settings</a></li>
                                     <li><button onClick={logoutHandler}>Logout</button></li>
                                 </ul>
                             </div>

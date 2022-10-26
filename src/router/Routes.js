@@ -9,6 +9,7 @@ import SingleCourse from '../components/SingleCourse/SingleCourse';
 import AuthenticationRoute from './AuthenticationRoute';
 import PrivateRoute from './PrivateRoute';
 import Cart from '../Pages/Cart/Cart';
+import AllCourse from '../components/AllCourse/AllCourse';
 
 const Routes = ({ children }) => {
     const router = createBrowserRouter([
@@ -32,6 +33,10 @@ const Routes = ({ children }) => {
                     path: '/courses',
                     element: <Courses />,
                     children: [
+                        {
+                            path: '/courses',
+                            element: <AllCourse />
+                        },
                         {
                             path: '/courses/:id',
                             element: <SingleCourse />,

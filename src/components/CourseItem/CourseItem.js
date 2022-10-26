@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import { ShoppingCartIcon, ClockIcon, CheckIcon, AcademicCapIcon } from '@heroicons/react/24/outline';
 import { CartContext } from '../../contexts/CartsContext';
+import { Link } from 'react-router-dom';
 
 const CourseItem = ({ course }) => {
     const { cart, addToCart } = useContext(CartContext);
-    const { id, name, thumbnail, duration, price, rating, totalEnroll } = course;
+    const { id, name, thumbnail, duration, price, totalEnroll } = course;
     const isCourseHaveCart = cart !== null && cart.find(cartItem => parseInt(cartItem.id) === parseInt(id));
 
     return (
@@ -13,7 +14,7 @@ const CourseItem = ({ course }) => {
                 <img src={thumbnail} alt="" className="rounded-xl" />
             </figure>
             <div className="card-body py-3">
-                <h2 className="card-title">{name}</h2>
+                <Link to={`/courses/${id}`}><h2 className="card-title">{name}</h2></Link>
                 <div className='flex'>
                     <span className='flex-1 flex items-center'>
                         <ClockIcon className='w-4 h-4 m-0 mr-1' />
