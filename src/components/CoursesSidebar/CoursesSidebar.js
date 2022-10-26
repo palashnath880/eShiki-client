@@ -1,12 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Achievement from '../Achievement/Achievement';
+import { CourseContext } from '../../contexts/CoursesContext';
 import PopularCourse from '../PopularCourse/PopularCourse';
 
 const CoursesSidebar = () => {
 
     const [loading, setLoading] = useState(true);
     const [category, setCategory] = useState(null);
+
+    const { courses } = useContext(CourseContext);
+
+    const courseSorting = courses !== null && courses.sort((a, b) => parseInt(a.totalEnroll) - parseInt(b.totalEnroll));
+    const reverseCourse = courseSorting && courseSorting.reverse();
+    const slicePopularCourse = reverseCourse ? reverseCourse.slice(0, 3) : [];
 
     useEffect(() => {
         fetch('https://eshiki-server-side.vercel.app/categories')
@@ -32,10 +38,9 @@ const CoursesSidebar = () => {
             <div>
                 <h2 className='text-xl text-center py-4 border-b border-gray-500'>Popular Courses</h2>
                 <div className='mt-5 px-2 grid grid-cols-1 gap-4'>
-                    <PopularCourse />
-                    <PopularCourse />
-                    <PopularCourse />
-                    <PopularCourse />
+                    {
+                        slicePopularCourse && slicePopularCourse.map((course, index) => <PopularCourse key={index} course={course} />)
+                    }
                 </div>
             </div>
         </div>
