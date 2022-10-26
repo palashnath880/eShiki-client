@@ -6,7 +6,7 @@ const PopularCourse = ({ course }) => {
     const { id, name, duration, thumbnail, totalEnroll } = course;
     return (
         <div className="card border bg-base-100">
-            <Link to={`/course/${id}`}>
+            <Link to={`/courses/${id}`}>
                 <figure><img src={thumbnail} alt="" /></figure>
                 <div className="card-body gap-0 px-3 py-5">
                     <h2 className="card-title">{name}</h2>

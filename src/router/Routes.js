@@ -34,7 +34,8 @@ const Routes = ({ children }) => {
                     children: [
                         {
                             path: '/courses/:id',
-                            element: <SingleCourse />
+                            element: <SingleCourse />,
+                            loader: ({ params }) => fetch(`https://eshiki-server-side.vercel.app/courses/${params.id}`),
                         }
                     ]
                 },
