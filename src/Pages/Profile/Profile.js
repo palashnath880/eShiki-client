@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { UserContext } from '../../contexts/AuthContext';
 
@@ -6,6 +6,8 @@ const Profile = () => {
 
     const { user, updateUser, forgetPassword } = useContext(UserContext);
     const [loading, setLoading] = useState(false);
+    const [userName, setUserName] = useState('');
+    const [profileImg, setProfileImg] = useState('');
 
     const passwordResetHandler = () => {
         const email = user.email;
@@ -34,6 +36,18 @@ const Profile = () => {
             .catch(error => console.error(error));
     }
 
+    const profileInputHandler = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        name === 'displayName' && setUserName(value);
+        name === 'photoURL' && setProfileImg(value);
+    }
+
+    useEffect(() => {
+        setProfileImg(user?.photoURL);
+        setUserName(user?.displayName);
+    }, []);
+
     return (
         <div className='container mx-auto'>
             <div className='min-h-[500px] my-10'>
@@ -49,11 +63,11 @@ const Profile = () => {
                             </div>
                             <div className='flex items-center gap-2 border px-2 py-3 rounded-md mb-2'>
                                 <label className='w-32 font-semibold'>Name</label>
-                                <input className='focus:outline-0 focus:bg-slate-100 py-2 focus:px-3 ml-2' type='text' name='displayName' value={user?.displayName} />
+                                <input onChange={profileInputHandler} className='focus:outline-0 focus:bg-slate-100 py-2 focus:px-3 ml-2' type='text' name='displayName' value={userName} />
                             </div>
                             <div className='flex items-center gap-2 border px-2 py-3 rounded-md mb-2'>
                                 <label className='w-32 font-semibold'>Photo Url</label>
-                                <input className='focus:outline-0 focus:bg-slate-100 py-2 focus:px-3 ml-2' type='urk' name='photoURL' value={user?.photoURL} />
+                                <input onChange={profileInputHandler} className='focus:outline-0 flex-1 focus:bg-slate-100 py-2 focus:px-3 ml-2' type='urk' name='photoURL' value={profileImg} />
                             </div>
                             {loading && <small className='pl-4 mt-3'>Updating.......</small>}
                             <div className='mt-5 p-3'>

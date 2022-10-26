@@ -6,7 +6,7 @@ import { UserContext } from '../../contexts/AuthContext';
 
 const SignUp = () => {
 
-    const { signUpHandler, githubAuthHandler, googleAuthHandler } = useContext(UserContext);
+    const { signUpHandler, githubAuthHandler, googleAuthHandler, updateUser } = useContext(UserContext);
     const [error, setError] = useState(null);
     const [signUpLoading, setSignUpLoading] = useState(false);
     const navigate = useNavigate();
@@ -18,11 +18,23 @@ const SignUp = () => {
 
         event.preventDefault();
         const form = event.target;
+        const fullName = form.fullName.value;
+        const photo_url = form.photo_url.value;
         const email = form.email.value;
         const password = form.password.value;
         const confirmPassword = form.confirmPassword.value;
 
         setError(null);
+
+        if (fullName.length <= 0 || !fullName) {
+            setError('Please enter name.');
+            return;
+        }
+
+        if (photo_url.length <= 0 || !photo_url) {
+            setError('Please enter name.');
+            return;
+        }
 
         if (email.length <= 0 || !email) {
             setError('Please enter email.');
@@ -43,6 +55,7 @@ const SignUp = () => {
         signUpHandler(email, password)
             .then(() => {
                 toast.success('Signup successfully');
+                updateUser(fullName, photo_url);
                 setSignUpLoading(false);
                 navigate(pathName, { replace: true });
             })
@@ -88,6 +101,18 @@ const SignUp = () => {
                     <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                         <div className="card-body">
                             <form onSubmit={createUserHandler}>
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text">Full Name</span>
+                                    </label>
+                                    <input type="text" name='fullName' placeholder="Full Name" className="input input-bordered" />
+                                </div>
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text">Profile Image Url</span>
+                                    </label>
+                                    <input type="url" name='photo_url' placeholder="Profile Image Url" className="input input-bordered" />
+                                </div>
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Email</span>

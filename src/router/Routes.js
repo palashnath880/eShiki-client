@@ -11,8 +11,13 @@ import PrivateRoute from './PrivateRoute';
 import Cart from '../Pages/Cart/Cart';
 import AllCourse from '../components/AllCourse/AllCourse';
 import Profile from '../Pages/Profile/Profile';
+import CheckOut from '../Pages/CheckOut/CheckOut';
+import NotFound from '../Pages/NotFound/NotFound';
+import CategoryCourse from '../Pages/CategoryCourse/CategoryCourse';
+import Blog from '../Pages/Blog/Blog';
 
 const Routes = ({ children }) => {
+
     const router = createBrowserRouter([
         {
             path: '/',
@@ -20,7 +25,7 @@ const Routes = ({ children }) => {
             children: [
                 {
                     path: '/',
-                    element: <PrivateRoute><Home /></PrivateRoute>
+                    element: <Home />
                 },
                 {
                     path: '/login',
@@ -52,6 +57,23 @@ const Routes = ({ children }) => {
                 {
                     path: '/profile',
                     element: <PrivateRoute><Profile /></PrivateRoute>
+                },
+                {
+                    path: '/checkout',
+                    element: <PrivateRoute><CheckOut /></PrivateRoute>
+                },
+                {
+                    path: '/blog',
+                    element: <Blog />
+                },
+                {
+                    path: '/category/:categoryId',
+                    element: <CategoryCourse />,
+                    loader: ({ params }) => fetch(`https://eshiki-server-side.vercel.app/categories/${params.categoryId}`),
+                },
+                {
+                    path: '*',
+                    element: <NotFound />
                 }
             ]
         }

@@ -10,7 +10,6 @@ const OurCourses = () => {
         <div className='pb-10'>
             <div className='text-center border-b pb-5'>
                 <h1 className='font-semibold text-3xl'>Our Courses</h1>
-                <p>Our recent new course</p>
             </div>
             <div className='py-5 grid grid-cols-3 gap-5'>
                 {

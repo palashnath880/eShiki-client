@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import React, { useState, useEffect, useContext } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 import { UserContext } from '../../contexts/AuthContext';
 import { CartContext } from '../../contexts/CartsContext';
+import { SunIcon, MoonIcon } from '@heroicons/react/24/outline';
 
 const Header = () => {
 
@@ -9,6 +10,7 @@ const Header = () => {
     const { cart } = useContext(CartContext);
 
     const [sticky, setSticky] = useState(false);
+    const [isDark, setIsDark] = useState(false);
 
     const logoutHandler = () => {
         logOut()
@@ -18,7 +20,24 @@ const Header = () => {
 
     const totalAmount = cart !== null ? cart.reduce((prev, next) => prev + parseInt(next.price), 0) : 0;
 
+    const themeHandler = () => {
+        const theme = localStorage.getItem('theme');
+        if (theme === 'dark') {
+            localStorage.removeItem('theme');
+            setIsDark(false);
+        } else {
+            localStorage.setItem('theme', 'dark');
+            setIsDark(true);
+        }
+    }
+
     useEffect(() => {
+
+        // theme set
+        const theme = localStorage.getItem('theme');
+        if (theme === 'dark') {
+            setIsDark(true);
+        }
 
         const stickyNavbar = () => {
             const currentScrollPos = window.pageYOffset;
@@ -45,17 +64,15 @@ const Header = () => {
                     <ul className={`menu menu-horizontal p-0`}>
                         <li><NavLink className={`bg-transparent text-gray-700`} to='/'>Home</NavLink></li>
                         <li><NavLink className={`bg-transparent text-gray-700`} to='/courses'>Our Courses</NavLink></li>
-                        <li><NavLink className={`bg-transparent text-gray-700`} to='/faq'>FAQ</NavLink></li>
+                        <li><NavLink className={`bg-transparent text-gray-700`} to='/blog'>Blog</NavLink></li>
                     </ul>
-                    {
-                        user === null && <>
-                            <ul className="flex gap-2">
-                                <li><NavLink className='duration-300 border hover:bg-violet-500 hover:text-slate-50 hover:border-violet-500 py-2 px-4 rounded-full' to='/login'>Login</NavLink></li>
-                                <li><NavLink className='duration-300 border hover:bg-violet-500 hover:text-slate-50 hover:border-violet-500 py-2 px-4 rounded-full' to='/signup'>Signup</NavLink></li>
-                            </ul>
-                        </>
-                    }
-
+                    <ul className="flex gap-2">
+                        {user === null && <li><NavLink className='duration-300 border hover:bg-violet-500 hover:text-slate-50 hover:border-violet-500 py-2 px-4 rounded-full' to='/login'>Login</NavLink></li>}
+                        {user === null && <li><NavLink className='duration-300 border hover:bg-violet-500 hover:text-slate-50 hover:border-violet-500 py-2 px-4 rounded-full' to='/signup'>Signup</NavLink></li>}
+                        <li className='h-full flex items-center'>
+                            <button className='px-3' onClick={themeHandler}>{isDark ? <MoonIcon className='w-6 h-6' /> : <SunIcon className='w-6 h-6' />}</button>
+                        </li>
+                    </ul>
                     <div className="dropdown dropdown-end mr-2">
                         <label tabIndex={0} className="btn btn-ghost btn-circle">
                             <div className="indicator">

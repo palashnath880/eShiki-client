@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { CourseContext } from '../../contexts/CoursesContext';
 import PopularCourse from '../PopularCourse/PopularCourse';
 
@@ -9,6 +9,7 @@ const CoursesSidebar = () => {
     const [category, setCategory] = useState(null);
 
     const { courses } = useContext(CourseContext);
+    const params = useParams();
 
     const courseSorting = courses !== null && courses.sort((a, b) => parseInt(a.totalEnroll) - parseInt(b.totalEnroll));
     const reverseCourse = courseSorting && courseSorting.reverse();
@@ -30,7 +31,7 @@ const CoursesSidebar = () => {
                 <div>
                     <ul className="menu menu-compact lg:menu-normal p-2 rounded-box">
                         {
-                            category !== null && category.length > 0 ? category.map(cate => <li key={cate.id}><Link to={`/category/${cate.id}`}>{cate.name}</Link></li>) : ''
+                            category !== null && category.length > 0 ? category.map(cate => <li key={cate.id}><Link className={`${params?.categoryId && parseInt(params.categoryId) === parseInt(cate.id) && 'bg-slate-200'}`} to={`/category/${cate.id}`}>{cate.name}</Link></li>) : ''
                         }
                     </ul>
                 </div>

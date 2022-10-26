@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { CourseContext } from '../../contexts/CoursesContext';
 
 const Footer = () => {
+    const { courseCategory } = useContext(CourseContext);
     return (
-        <footer className='bg-gray-700'>
+        <footer className='bg-gray-700 pt-10'>
             <div className='mx-auto container'>
                 <div className='flex flex-row gap-4 py-5 text-slate-50'>
                     <div className='w-4/12'>
@@ -17,21 +19,18 @@ const Footer = () => {
                     <div className='w-4/12 px-2'>
                         <h3 className='font-semibold text-lg border-b border-slate-400 pb-3'>Categories</h3>
                         <ul className="mt-3 ml-3 font-normal">
-                            <li><Link className='pt-1 pb-2 mb-1 block duration-300 border-b border-transparent hover:border-slate-500'>Javascript</Link></li>
-                            <li><Link className='pt-1 pb-2 mb-1 block duration-300 border-b border-transparent hover:border-slate-500'>PHP</Link></li>
-                            <li><Link className='pt-1 pb-2 mb-1 block duration-300 border-b border-transparent hover:border-slate-500'>Python</Link></li>
-                            <li><Link className='pt-1 pb-2 mb-1 block duration-300 border-b border-transparent hover:border-slate-500'>Javascript</Link></li>
-                            <li><Link className='pt-1 pb-2 mb-1 block duration-300 border-b border-transparent hover:border-slate-500'>PHP</Link></li>
+                            {
+                                courseCategory !== null && courseCategory.map((category, index) => <li key={index}><Link to={`/category/${category?.id}`} className='pt-1 pb-2 mb-1 block duration-300 border-b border-transparent hover:border-slate-500'>{category?.name}</Link></li>)
+                            }
                         </ul>
                     </div>
                     <div className='w-4/12 px-2'>
                         <h3 className='font-semibold text-lg border-b border-slate-400 pb-3'>Menu</h3>
                         <ul className="mt-3 ml-3 font-normal">
-                            <li><Link className='pt-1 pb-2 mb-1 block duration-300 border-b border-transparent hover:border-slate-500'>Home</Link></li>
-                            <li><Link className='pt-1 pb-2 mb-1 block duration-300 border-b border-transparent hover:border-slate-500'>About</Link></li>
-                            <li><Link className='pt-1 pb-2 mb-1 block duration-300 border-b border-transparent hover:border-slate-500'>Courses</Link></li>
-                            <li><Link className='pt-1 pb-2 mb-1 block duration-300 border-b border-transparent hover:border-slate-500'>Privacy & Policy</Link></li>
-                            <li><Link className='pt-1 pb-2 mb-1 block duration-300 border-b border-transparent hover:border-slate-500'></Link></li>
+                            <li><Link className='pt-1 pb-2 mb-1 block duration-300 border-b border-transparent hover:border-slate-500' to={'/'}>Home</Link></li>
+                            <li><Link className='pt-1 pb-2 mb-1 block duration-300 border-b border-transparent hover:border-slate-500' to={'/courses'}>Courses</Link></li>
+                            <li><Link className='pt-1 pb-2 mb-1 block duration-300 border-b border-transparent hover:border-slate-500' to={'/blog'}>Blog</Link></li>
+                            <li><Link className='pt-1 pb-2 mb-1 block duration-300 border-b border-transparent hover:border-slate-500' to={'/cart'}>Cart</Link ></li>
                         </ul>
                     </div>
                 </div>
