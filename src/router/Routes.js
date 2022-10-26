@@ -8,6 +8,7 @@ import SignUp from '../Pages/SignUp/SignUp';
 import SingleCourse from '../components/SingleCourse/SingleCourse';
 import AuthenticationRoute from './AuthenticationRoute';
 import PrivateRoute from './PrivateRoute';
+import Cart from '../Pages/Cart/Cart';
 
 const Routes = ({ children }) => {
     const router = createBrowserRouter([
@@ -36,6 +37,10 @@ const Routes = ({ children }) => {
                             element: <SingleCourse />
                         }
                     ]
+                },
+                {
+                    path: '/cart',
+                    element: <Cart />
                 }
             ]
         }

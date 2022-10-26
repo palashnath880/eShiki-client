@@ -18,8 +18,6 @@ const Header = () => {
 
     const totalAmount = cart !== null ? cart.reduce((prev, next) => prev + parseInt(next.price), 0) : 0;
 
-    console.log(cart);
-
     useEffect(() => {
 
         const stickyNavbar = () => {
@@ -73,7 +71,7 @@ const Header = () => {
                                 <span className="font-bold text-lg text-gray-700">{cart ? cart.length : 0} Courses</span>
                                 <span className="text-info">Subtotal: &#2547; {totalAmount}</span>
                                 <div className="card-actions">
-                                    <button className="btn btn-primary btn-block">View cart</button>
+                                    <Link to='/cart' className="btn btn-primary btn-block">View cart</Link>
                                 </div>
                             </div>
                         </div>
