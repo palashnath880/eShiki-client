@@ -11,7 +11,7 @@ const OurCourses = () => {
             <div className='text-center border-b pb-5'>
                 <h1 className='font-semibold text-3xl'>Our Courses</h1>
             </div>
-            <div className='py-5 grid grid-cols-1 md:grid-cols-3 gap-5'>
+            <div className='py-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
                 {
                     slice3Course.length > 0 && slice3Course.map((course, index) => <CourseItem key={index} course={course} />)
                 }

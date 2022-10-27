@@ -7,9 +7,9 @@ const Footer = () => {
     return (
         <footer className='bg-gray-700 pt-10'>
             <div className='mx-auto container'>
-                <div className='grid grid-cols-1 gap-4 py-5 px-5 md:px-0 text-slate-50'>
+                <div className='grid grid-cols-1 lg:grid-cols-3 gap-4 py-5 px-5 md:px-0 text-slate-50'>
                     <div className=''>
-                        <div className='flex flex-col items-center md:items-start justify-center h-full'>
+                        <div className='flex flex-col items-center lg:items-start justify-center h-full'>
                             <h1 className='text-7xl text-violet-300' style={{ fontFamily: "'Lobster Two', cursive" }}>
                                 <span className='text-slate-50'>e</span>Shiki.com
                             </h1>

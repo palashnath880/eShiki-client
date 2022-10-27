@@ -7,7 +7,7 @@ const AllCourse = () => {
     const { courses, courseCategory } = useContext(CourseContext);
     return (
         <div className='px-5 my-10'>
-            <div className='mb-5'>
+            <div className='mb-5 lg:hidden'>
                 <p className='text-lg text-center border-b pb-2'>Category</p>
                 <div className='flex flex-wrap gap-2 mt-3 justify-center'>
                     {
