@@ -149,7 +149,7 @@ const SignUp = () => {
                                     <FaGithub className='mr-2' />
                                     Continue With Github
                                 </button>
-                                <p className='mt-2 text-sm'>You have an account. Please <Link className='underline text-primary' to='/signup'>Login</Link></p>
+                                <p className='mt-2 text-sm'>You have an account. Please <Link className='underline text-primary' to='/login'>Login</Link></p>
                             </div>
                         </div>
                     </div>
