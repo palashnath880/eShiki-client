@@ -45,12 +45,11 @@ const AuthContext = ({ children }) => {
     }
 
     useEffect(() => {
-        const unsubscribe = () => {
-            onAuthStateChanged(auth, (currentUser) => {
-                setUser(currentUser);
-                setLoading(false);
-            });
-        }
+
+        const unsubscribe = onAuthStateChanged(auth, currentUser => {
+            setUser(currentUser);
+            setLoading(false);
+        });
 
         return () => {
             unsubscribe();

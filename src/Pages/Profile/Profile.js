@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 import { UserContext } from '../../contexts/AuthContext';
 
@@ -6,8 +6,8 @@ const Profile = () => {
 
     const { user, updateUser, forgetPassword } = useContext(UserContext);
     const [loading, setLoading] = useState(false);
-    const [userName, setUserName] = useState('');
-    const [profileImg, setProfileImg] = useState('');
+    const [userName, setUserName] = useState(user?.displayName);
+    const [profileImg, setProfileImg] = useState(user?.photoURL);
 
     const passwordResetHandler = () => {
         const email = user.email;
@@ -43,17 +43,14 @@ const Profile = () => {
         name === 'photoURL' && setProfileImg(value);
     }
 
-    useEffect(() => {
-        setProfileImg(user?.photoURL);
-        setUserName(user?.displayName);
-    }, []);
-
     return (
         <div className='container mx-auto'>
             <div className='min-h-[500px] my-10'>
                 <div className=' w-8/12 mx-auto rounded-md border shadow-lg p-3'>
                     <div className='mt-5'>
-                        <div className='w-32 cursor-pointer h-32 rounded-full overflow-hidden mx-auto'><img src={user.photoURL ? user.photoURL : 'https://placeimg.com/192/192/people'} /></div>
+                        <div className='w-32 cursor-pointer h-32 rounded-full overflow-hidden mx-auto'>
+                            <img src={`${user.photoURL ? user.photoURL : 'https://placeimg.com/192/192/people'}`} alt='' />
+                        </div>
                     </div>
                     <div>
                         <form onSubmit={updateProfileHandler} className='mt-10'>

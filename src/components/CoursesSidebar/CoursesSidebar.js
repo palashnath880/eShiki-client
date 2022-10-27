@@ -4,8 +4,6 @@ import { CourseContext } from '../../contexts/CoursesContext';
 import PopularCourse from '../PopularCourse/PopularCourse';
 
 const CoursesSidebar = () => {
-
-    const [loading, setLoading] = useState(true);
     const [category, setCategory] = useState(null);
 
     const { courses } = useContext(CourseContext);
@@ -19,11 +17,11 @@ const CoursesSidebar = () => {
         fetch('https://eshiki-server-side.vercel.app/categories')
             .then(res => res.json())
             .then(data => {
-                setLoading(false);
                 setCategory(data);
             })
             .catch(error => console.error(error));
     }, []);
+
     return (
         <div className='px-2 pb-5 bg-slate-50 text-gray-600'>
             <div>

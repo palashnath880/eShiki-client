@@ -15,7 +15,7 @@ const RelatedCourse = ({ categoryId, courseId }) => {
                 }
             })
             .catch(error => console.error(error));
-    }, [])
+    }, [categoryId, courseId])
 
     if (relatedCourse === null || relatedCourse.length <= 0) {
         return (<></>);

@@ -5,7 +5,7 @@ import { UserContext } from './contexts/AuthContext';
 import Routes from './router/Routes';
 
 const App = () => {
-  const { user, loading } = useContext(UserContext);
+  const { loading } = useContext(UserContext);
 
   if (loading) {
     return (

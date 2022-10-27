@@ -27,20 +27,25 @@ const SingleCourse = () => {
         <div className='px-5 mt-5'>
             <div>
                 <div className='flex gap-2'>
-                    <div className='w-9/12' ref={ref} >
-                        <h4 className='text-2xl'>{name}</h4>
-                        <p className='mb-4 flex gap-4 font-semibold'>
-                            <span>Category: <Link className='font-normal hover:underline' to={`/category/${findCategory?.id}`}>{findCategory?.name}</Link></span>
-                            <span>Student: <span className='font-normal'>{totalEnroll}</span></span>
-                            <span>Duration: <span className='font-normal'>{duration}</span></span>
-                        </p>
-                        <div className='p-2 w-full '>
-                            <div className='rounded-md overflow-hidden'>
-                                <img src={thumbnail} alt='' />
+                    <div className='w-9/12' >
+                        <div ref={ref} >
+                            <div className='p-2'>
+                                <h4 className='text-2xl'>{name}</h4>
+                                <p className='mb-4 flex gap-4 font-semibold'>
+                                    <span>Category: <Link className='font-normal hover:underline' to={`/category/${findCategory?.id}`}>{findCategory?.name}</Link></span>
+                                    <span>Student: <span className='font-normal'>{totalEnroll}</span></span>
+                                    <span>Duration: <span className='font-normal'>{duration}</span></span>
+                                </p>
                             </div>
-                            <p className='mt-5'>{description}</p>
+                            <div className='p-2 w-full '>
+                                <div className='rounded-md overflow-hidden'>
+                                    <img className='w-full' src={thumbnail} alt='' />
+                                </div>
+                                <p className='mt-5'>{description}</p>
+                            </div>
                         </div>
                     </div>
+
                     <div className='w-3/12 pt-10 rounded-md border px-1'>
                         <p className='flex mb-3 px-3 text-lg justify-between'>
                             <span>Price</span>
@@ -51,7 +56,7 @@ const SingleCourse = () => {
                         </button>
                         <button onClick={() => enrollCourse(id, price)} className='mb-2 w-full text-center border border-green-500 bg-green-500 text-slate-50 py-2 hover:bg-transparent hover:text-gray-700 duration-300'>Enroll Course</button>
 
-                        <ReactToPdf targetRef={ref} filename="div-blue.pdf">
+                        <ReactToPdf targetRef={ref} filename={`${name}.pdf`}>
                             {({ toPdf }) => (
                                 <button className='w-full py-2 mt-2 border' onClick={toPdf}>Download pdf</button>
                             )}

@@ -8,7 +8,7 @@ const Login = () => {
 
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
-    const { loginHandler, googleAuthHandler, githubAuthHandler } = useContext(UserContext);
+    const { loginHandler, googleAuthHandler, githubAuthHandler, forgetPassword } = useContext(UserContext);
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -69,6 +69,12 @@ const Login = () => {
             .catch(error => console.log(error));
     }
 
+    const resetPasswordHandler = () => {
+        // forgetPassword()
+        //     .then()
+        //     .catch();
+    }
+
     return (
         <div className=''>
             <div className="hero min-h-screen bg-base-200">
@@ -94,7 +100,7 @@ const Login = () => {
                                     </label>
                                     <input type="password" name='password' placeholder="password" className="input input-bordered" required />
                                     <label className="label">
-                                        <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                                        <button onClick={resetPasswordHandler} className="label-text-alt link link-hover">Forgot password?</button>
                                     </label>
                                 </div>
                                 {error !== null && <small className='text-red-400 font-semibold mt-2 block pl-2'>{error}</small>}
