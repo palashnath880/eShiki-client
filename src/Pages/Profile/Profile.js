@@ -44,9 +44,9 @@ const Profile = () => {
     }
 
     return (
-        <div className='container mx-auto'>
+        <div className='container mt-10 mx-auto'>
             <div className='min-h-[500px] my-10'>
-                <div className=' w-8/12 mx-auto rounded-md border shadow-lg p-3'>
+                <div className='w-full md:w-8/12 mx-auto rounded-md border shadow-lg p-3'>
                     <div className='mt-5'>
                         <div className='w-32 cursor-pointer h-32 rounded-full overflow-hidden mx-auto'>
                             <img src={`${user.photoURL ? user.photoURL : 'https://placeimg.com/192/192/people'}`} alt='' />

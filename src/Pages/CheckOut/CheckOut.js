@@ -31,23 +31,23 @@ const CheckOut = () => {
     }
 
     return (
-        <div className='container mx-auto'>
-            <div className='w-7/12 mx-auto my-10 border p-3 rounded-md shadow-lg'>
+        <div className='container px-5 md:px-0 mx-auto pt-10'>
+            <div className='w-full md:w-7/12 mx-auto my-10 border p-3 rounded-md shadow-lg'>
                 <div className='border-b'>
                     <p className='py-3 flex'>
-                        <span className='flex-1'>Name:</span>
+                        <span className='w-3/12 md:flex-1'>Name:</span>
                         <span className='flex-1'>{user?.displayName}</span>
                     </p>
                 </div>
                 <div className='border-b'>
                     <p className='py-3 flex'>
-                        <span className='flex-1'>Email:</span>
+                        <span className='w-3/12 md:flex-1'>Email:</span>
                         <span className='flex-1'>{user?.email}</span>
                     </p>
                 </div>
                 <div className='border-b'>
                     <p className='py-3 flex'>
-                        <span className='flex-1'>Address:</span>
+                        <span className='w-3/12 md:flex-1'>Address:</span>
                         <span className='flex-1'>
                             <input onChange={inputHandler} className='focus:outline-0 w-full' type='text' placeholder='Enter Address Here' name='address' />
                         </span>
@@ -55,7 +55,7 @@ const CheckOut = () => {
                 </div>
                 <div className='border-b'>
                     <p className='py-3 flex'>
-                        <span className='flex-1'>Payment Method:</span>
+                        <span className='w-3/12 md:flex-1'>Payment Method:</span>
                         <span className='flex-1 flex items-center'>
                             <input onChange={inputHandler} id='bkash' className='cursor-pointer mr-1' type='radio' name='payment_method' value='bKash' />
                             <label htmlFor='bkash' className='mr-2 cursor-pointer'>bKash</label>

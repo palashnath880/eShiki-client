@@ -89,8 +89,8 @@ const SignUp = () => {
     }
 
     return (
-        <div className='mt-10'>
-            <div className="hero min-h-screen bg-base-200">
+        <div className=''>
+            <div className="hero pt-10 min-h-screen bg-base-200">
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div className="text-center lg:text-left">
                         <h1 className="text-5xl font-bold">Signup now!</h1>
