@@ -14,11 +14,11 @@ const CategoryCourse = () => {
     return (
         <div className='container mx-auto'>
             <div className='flex flex-col md:flex-row'>
-                <div className='hidden md:block w-3/12'>
+                <div className='hidden lg:block w-3/12'>
                     <CoursesSidebar />
                 </div>
                 <div className='flex-1'>
-                    <div className='mt-5'>
+                    <div className='mt-5 block lg:hidden'>
                         <p className='text-lg text-center border-b pb-2'>Category</p>
                         <div className='flex flex-wrap gap-2 mt-3 justify-center'>
                             {

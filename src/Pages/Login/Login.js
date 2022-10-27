@@ -7,6 +7,8 @@ import { UserContext } from '../../contexts/AuthContext';
 const Login = () => {
 
     const [error, setError] = useState(null);
+    const [resetPwdForm, setResetPwdForm] = useState(false);
+    const [resetPwdError, setResetPwdError] = useState(false);
     const [loading, setLoading] = useState(false);
     const { loginHandler, googleAuthHandler, githubAuthHandler, forgetPassword } = useContext(UserContext);
 
@@ -69,10 +71,21 @@ const Login = () => {
             .catch(error => console.log(error));
     }
 
-    const resetPasswordHandler = () => {
-        // forgetPassword()
-        //     .then()
-        //     .catch();
+    const resetPasswordHandler = (e) => {
+        e.preventDefault();
+        setResetPwdError(false);
+        const email = e.target.email.value;
+        forgetPassword(email)
+            .then(() => {
+                toast.success('Password reset link send successfully.');
+                setResetPwdForm(false);
+            })
+            .catch(error => {
+                console.log()
+                if (error.code === 'auth/user-not-found') {
+                    setResetPwdError(true);
+                }
+            });
     }
 
     return (
@@ -100,7 +113,7 @@ const Login = () => {
                                     </label>
                                     <input type="password" name='password' placeholder="password" className="input input-bordered" required />
                                     <label className="label">
-                                        <button onClick={resetPasswordHandler} className="label-text-alt link link-hover">Forgot password?</button>
+                                        <button type='button' onClick={() => setResetPwdForm(true)} className="label-text-alt link link-hover">Forgot password?</button>
                                     </label>
                                 </div>
                                 {error !== null && <small className='text-red-400 font-semibold mt-2 block pl-2'>{error}</small>}
@@ -127,6 +140,24 @@ const Login = () => {
                     </div>
                 </div>
             </div>
+            {resetPwdForm &&
+                <div className="hero h-screen z-50 w-full fixed top-0 left-0 flex justify-center items-center" style={{ background: '#00000075' }}>
+                    <div className='w-96 p-3 rounded-md bg-base-100'>
+                        <form onSubmit={resetPasswordHandler}>
+                            <div className="form-control">
+                                <label className="label">
+                                    <span className="label-text">Email</span>
+                                </label>
+                                <input type="email" name='email' placeholder="email" className="input input-bordered" required />
+                            </div>
+                            {resetPwdError && <small className='text-red-500'>User Not Found</small>}
+                            <div className='mt-4'>
+                                <button type='submit' className='bg-green-500 text-slate-50 px-4 py-2'>Send Link</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            }
         </div>
     );
 }

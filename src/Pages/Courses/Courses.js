@@ -6,7 +6,7 @@ const Courses = () => {
     return (
         <div className='container mx-auto'>
             <div className='flex flex-col md:flex-row'>
-                <div className='hidden md:block w-3/12'>
+                <div className='hidden lg:block w-3/12'>
                     <CoursesSidebar />
                 </div>
                 <div className='flex-1'>

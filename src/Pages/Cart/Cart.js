@@ -16,7 +16,7 @@ const Cart = () => {
     return (
         <div className='container mx-auto py-10'>
             <h2 className='text-center my-5 pb-5 text-3xl border-b'>Cart</h2>
-            <div className='flex flex-col md-flex-row px-5 md:px-0 gap-2'>
+            <div className='flex flex-col md:flex-row px-5 md:px-0 gap-2'>
                 <div className='flex-1 md:min-h-[400px]'>
                     <div>
                         {
@@ -27,7 +27,7 @@ const Cart = () => {
 
                     </div>
                 </div>
-                <div className='w-full md:w-3/12'>
+                <div className='w-full md:w-4/12 lg:w-3/12'>
                     <div className='border shadow-lg rounded-md pb-10 md:pb-0 md:h-full'>
                         <h2 className='text-xl text-center py-5 border-b'>Totals</h2>
                         <div className='px-2 py-3'>
